@@ -1,8 +1,10 @@
+const secretKey = "mkvCinemas";
+
 async function getKeyMaterial(password) {
     return new TextEncoder().encode(password);
 }
 
-async function encryptURL(url, secretKey) {
+async function encryptURL(url) {
     const enc = new TextEncoder();
 
     const keyMaterial = await getKeyMaterial(secretKey);
@@ -37,7 +39,7 @@ async function encryptURL(url, secretKey) {
     return btoa(String.fromCharCode(...encryptedBytes));
 }
 
-async function decryptURL(encryptedBase64, secretKey) {
+async function decryptURL(encryptedBase64) {
     const enc = new TextEncoder();
     const data = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0));
 
