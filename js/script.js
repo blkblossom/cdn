@@ -73,15 +73,15 @@ async function decryptURL(encryptedBase64) {
     return new TextDecoder().decode(decrypted);
 }
 
-function obfuscate(str, key) {
+function obfuscate(str) {
     return btoa(str.split('').map((c, i) =>
-        String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+        String.fromCharCode(c.charCodeAt(0) ^ secretKey.charCodeAt(i % secretKey.length))
     ).join(''));
 }
 
-function deobfuscate(encoded, key) {
+function deobfuscate(encoded) {
     const str = atob(encoded);
     return str.split('').map((c, i) =>
-        String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+        String.fromCharCode(c.charCodeAt(0) ^ secretKey.charCodeAt(i % secretKey.length))
     ).join('');
 }
