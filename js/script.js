@@ -73,6 +73,11 @@ async function decryptURL(encryptedBase64) {
     return new TextDecoder().decode(decrypted);
 }
 
+async function checkDecryptURL(encryptedBase64) {
+    const url = await decryptURL(encryptedBase64);
+    return url.includes(".gdtot.");
+}
+
 function obfuscate(str) {
     return btoa(str.split('').map((c, i) =>
         String.fromCharCode(c.charCodeAt(0) ^ secretKey.charCodeAt(i % secretKey.length))
